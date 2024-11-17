@@ -9,12 +9,11 @@ import { QrCodeData, FormValidationStatus } from "../../types/QrCode";
 import qrCodeApi from "../../api/qrCodeApi";
 import Loading from "../../components/Loading";
 import registerQrCodeHelper from "./registerQrCodeHelper";
-import Alert from "../../components/Alert/Alert";
 import { Type, useAlertContext } from "../../contexts/AlertContext";
 import { useNavigation } from "@react-navigation/native";
 import Header from "../../components/Header";
 
-const { spacing } = Sizes;
+const { spacing, text } = Sizes;
 
 const defaultFormData = {
   name: "",
@@ -42,7 +41,7 @@ export default function RegisterQrCode() {
   const urlRef = useRef<TextInput>(null);
   const additionalDataRef = useRef<TextInput>(null);
 
-  const { closeAlert, showAlert } = useAlertContext();
+  const { showAlert } = useAlertContext();
 
   const { setOptions } = useNavigation();
 
@@ -57,7 +56,8 @@ export default function RegisterQrCode() {
 
   const onKeyboardHidden = () => {
     setOptions({
-      tabBarStyle: { display: "flex" },
+      tabBarLabelStyle: { fontSize: text.small },
+      tabBarStyle: { height: 72, paddingTop: spacing.xSmall, elevation: 12 },
       header: ({ options: { title } }: any) => <Header title={title} />,
     });
 
@@ -110,6 +110,9 @@ export default function RegisterQrCode() {
       });
 
       showAlert("Uhul!", "O QR Code foi cadastrado com sucesso.", Type.Success);
+      setFormData(defaultFormData);
+      setFormValidationStatus(defaultFormValidationStatus);
+      setAlreadySubmitted(false);
     } catch (error: any) {
       console.error(error.message);
 
@@ -141,6 +144,7 @@ export default function RegisterQrCode() {
           value={name}
           hasError={alreadySubmitted && !formValidationStatus["name"]}
           onSubmitEditing={() => descriptionRef.current?.focus()}
+          maxLength={32}
         />
 
         <ThemedInput
@@ -151,6 +155,7 @@ export default function RegisterQrCode() {
           ref={descriptionRef}
           hasError={alreadySubmitted && !formValidationStatus["description"]}
           onSubmitEditing={() => urlRef.current?.focus()}
+          maxLength={50}
         />
 
         <ThemedInput
@@ -161,6 +166,7 @@ export default function RegisterQrCode() {
           ref={urlRef}
           hasError={alreadySubmitted && !formValidationStatus["url"]}
           onSubmitEditing={() => additionalDataRef.current?.focus()}
+          maxLength={100}
         />
 
         <ThemedInput

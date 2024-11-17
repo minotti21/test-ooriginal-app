@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import {
   Camera,
   Code,
@@ -7,7 +7,7 @@ import {
   useCameraPermission,
   useCodeScanner,
 } from "react-native-vision-camera";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { useQrCodeContext } from "../../contexts/QrCodeDataContext";
 import ThemedText from "../../components/ThemedText";
 import Colors from "../../constants/Colors";
@@ -16,11 +16,12 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Type, useAlertContext } from "../../contexts/AlertContext";
 import ThemedButton from "../../components/ThemedButton";
 
-const { spacing, radius } = Sizes;
+const { spacing } = Sizes;
 
 export default function ReadQrCode() {
   const { hasPermission, requestPermission } = useCameraPermission();
   const device = useCameraDevice("back");
+  const isFocused = useIsFocused();
 
   const { navigate } = useNavigation();
 
@@ -88,7 +89,7 @@ export default function ReadQrCode() {
     <Camera
       style={StyleSheet.absoluteFill}
       device={device}
-      isActive={true}
+      isActive={isFocused}
       codeScanner={codeScanner}
     />
   );

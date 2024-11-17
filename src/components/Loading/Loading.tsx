@@ -2,7 +2,7 @@ import { ActivityIndicator, Image, StyleSheet, View } from "react-native";
 import Colors from "../../constants/Colors";
 import Sizes from "../../constants/Sizes";
 
-const { spacing, radius } = Sizes;
+const { spacing } = Sizes;
 
 interface LoadingProps {
   isVisible: boolean;

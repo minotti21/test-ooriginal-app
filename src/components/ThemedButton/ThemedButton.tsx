@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, ViewStyle } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../../constants/Colors";
 import ThemedText from "../ThemedText";
 import Sizes from "../../constants/Sizes";

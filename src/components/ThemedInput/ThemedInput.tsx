@@ -14,6 +14,7 @@ interface ThemedInputProps {
   placeholder: string;
   hasError?: boolean;
   onSubmitEditing?: () => void;
+  maxLength?: number;
 }
 
 function ThemedInput(
@@ -24,6 +25,7 @@ function ThemedInput(
     placeholder,
     hasError,
     onSubmitEditing,
+    maxLength,
   }: ThemedInputProps,
   ref?: ForwardedRef<TextInput>,
 ) {
@@ -33,9 +35,10 @@ function ThemedInput(
 
       <TextInput
         style={styles.input}
-        submitBehavior="submit" 
+        submitBehavior="submit"
         placeholderTextColor={Colors.lightGray}
         placeholder={placeholder}
+        maxLength={maxLength}
         onChangeText={onChangeText}
         value={value}
         onSubmitEditing={onSubmitEditing}
