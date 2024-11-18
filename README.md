@@ -13,7 +13,7 @@ Passos para instalar o projeto:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/minotti21/test-original-app
+   git clone https://github.com/minotti21/test-ooriginal-app
    ```
 
 2. Navegue para o diretório do projeto:
